@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emergency Report</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <header>
+    <h1>Emergency Violence Report</h1>
+    <p class="hotline">Hotline: <a href="tel:+18007997233" style="color: #ffeb3b;">1-800-799-7233</a></p>
+  </header>
+
+  <div class="main-container">
+    <h1>Report Now</h1>
+    <p>If you are in danger, report the incident below quickly. Stay safe!</p>
+    <form action="#" method="POST" class="report-form">
+      <label for="location">Location:</label>
+      <input type="text" id="location" name="location" placeholder="Enter city or address" required>
+
+      <label for="description">What happened?</label>
+      <textarea id="description" name="description" rows="5" placeholder="Describe the incident" required></textarea>
+
+      <label for="category">Type of Violence:</label>
+      <select id="category" name="category" required>
+        <option value="domestic">Domestic Violence</option>
+        <option value="workplace">Workplace Violence</option>
+        <option value="school">School Violence</option>
+        <option value="public">Public Violence</option>
+      </select>
+
+      <button type="submit">Submit Report</button>
+    </form>
+    <a href="tel:+911" class="emergency-button">Call 911</a>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 Emergency Report. All rights reserved.</p>
+  </footer>
+</body>
+</html>
