@@ -11,12 +11,12 @@ export default function Home() {
     }
 
     return(
-        <section className="home flex justify-center items-center h-[550px] mt-12 w-full">
+        <section className="home flex justify-center items-center h-[500px] md:h-[550px] mt-8 w-full">
             <form action="" className="sm:[95%] w-4/5 max-w-[600px] bg-white px-6 pt-6 pb-8 rounded-lg h-full shadow-custom relative">
-                <h2 className="text-2xl md:text-3xl font-bold text-center">Domestic Violence</h2>
+                <h2 className="text-xl md:text-3xl font-bold text-center">Domestic Violence</h2>
                 <div className="input-box mt-7 mb-9">
                     <label>What happened?</label>
-                    <textarea name="" id="" placeholder="Describe the incident..." className="w-full h-[200px] border-2 border-solid border-[#ddd] outline-none rounded-md p-4 text-base text-gray-500 mt-2 resize-none"></textarea>
+                    <textarea name="" id="" placeholder="Describe the incident..." className="w-full h-[200px] border-2 border-solid border-[#ddd] outline-none rounded-md p-4 md:text-base text-sm text-gray-500 mt-2 resize-none"></textarea>
                     <div className="flex items-center gap-1 text-sm w-20 transform transition-all duration-500 ease-in-out md:mt-4" onClick={handleUploadState}> 
                         { upload ? <IoIosRemoveCircle className="bg-white rounded-full text-[#5935e4] h-7 w-7 transition-all duration-500 ease-in-out" /> : <IoIosAddCircle className="bg-white rounded-full text-[#5935e4] h-7 w-7 transition-all duration-500 ease-in-out"/>}
                          <p>Upload</p>
@@ -35,7 +35,7 @@ export default function Home() {
                         <p className="text-[15px] leading-5">Upload a file</p>
                     </button>
                 </div>
-                <button type="submit" className="w-full h-14 bg-[#826afb] border-none rounded-md shadow-custom cursor-pointer text-base mt-8 ">Submit Report!</button>
+                <button type="submit" className="w-full h-14 bg-[#826afb] border-none rounded-md shadow-custom cursor-pointer text-base md:mt-8 mt-4 text-white">Submit Report!</button>
             </form>
         </section>
     );
