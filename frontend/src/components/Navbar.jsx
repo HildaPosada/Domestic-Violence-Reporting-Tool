@@ -11,8 +11,13 @@ export default function Navbar() {
     }
 
     return(
+<<<<<<< HEAD
+        <div className="p-6 md:p-8 flex justify-between items-center text-white md:w-full md:max-w-[1280px] md:mx-auto relative">
+            <img src="/logo.webp" alt="Logo" className="h-8 w-8 md:h-10 md:w-10 object-contain" />
+=======
         <div className="p-6 md:p-2 flex justify-between items-center text-white md:w-full md:max-w-[1280px] md:mx-auto relativ">
             <img src="/logo.png" alt="Logo" className="h-16 w-16 md:h-20 md:w-20 object-contain" />
+>>>>>>> a200dbd070c1a5ea0aa90f999b55119fd6b86502
             <nav className="hidden md:flex">
                 <ul className="flex gap-6">
                     <Link to='/'>Report Now</Link>
