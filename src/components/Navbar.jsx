@@ -12,9 +12,7 @@ export default function Navbar() {
 
     return(
         <div className="p-6 md:p-8 flex justify-between items-center text-white md:w-full md:max-w-[1280px] md:mx-auto relative">
-            <h1>
-                Xcode
-            </h1>
+            <img src="/logo.png" alt="Logo" className="h-16 w-16 md:h-20 md:w-20 object-contain" />
             <nav className="hidden md:flex">
                 <ul className="flex md:gap-12">
                     <Link to='/'>Report Now</Link>
