@@ -4,12 +4,12 @@ import uuid
 
 
 class User(BaseModel):
-    pass
+    uid: uuid.UUID
+    username: str
+    is_active: bool
+    created_at: datetime
+    updated_at: datetime
 
 
 class UserCreateModel(BaseModel):
-    pass
-
-
-class UserUpdateModel(BaseModel):
-    pass
+    username: str

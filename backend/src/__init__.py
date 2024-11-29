@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
 from src.db.main import init_db
+from src.auth.routes import auth_router
+
 
 @asynccontextmanager
 async def life_span(app: FastAPI):
@@ -20,4 +22,7 @@ app = FastAPI(
 
 @app.get("/")
 async def index():
-    return {"message": "hello world"}
+    return {"message": "Domestic Violence Reporting Tool"}
+
+
+app.include_router(auth_router, prefix=f"/api/{version}")
