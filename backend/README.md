@@ -2,7 +2,7 @@
 
 ## Overview
 
-Domestic Violence Reporting Tool API backend
+Domestic Violence Reporting Tool API
 
 ## Technologies
 
