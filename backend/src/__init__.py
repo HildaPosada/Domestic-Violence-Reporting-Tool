@@ -9,7 +9,7 @@ async def life_span(app: FastAPI):
     print(f"Server is starting....")
     await init_db()
     yield
-    print(f"Server has stopped Stopped")
+    print(f"Server has stopped.")
 
 version = "v1"
 
@@ -21,8 +21,8 @@ app = FastAPI(
 )
 
 @app.get("/")
-async def index():
+def root():
     return {"message": "Domestic Violence Reporting Tool"}
 
 
-app.include_router(auth_router, prefix=f"/api/{version}")
+app.include_router(auth_router, prefix=f"/api/{version}/users", tags=["users"])

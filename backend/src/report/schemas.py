@@ -13,7 +13,3 @@ class User(BaseModel):
 
 class UserCreateModel(BaseModel):
     username: str
-
-
-class UserUpdateModel(BaseModel):
-    username: str
