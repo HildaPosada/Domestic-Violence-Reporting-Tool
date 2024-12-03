@@ -12,7 +12,7 @@ export default function Navbar() {
 
     return(
         <div className="p-6 md:p-8 flex justify-between items-center text-white md:w-full md:max-w-[1280px] md:mx-auto relative">
-            <img src="/logo.webp" alt="Logo" className="h-8 w-8 md:h-10 md:w-10 object-contain" />
+            <img src="/logo.png" alt="Logo" className="h-8 w-8 md:h-10 md:w-10 object-contain" />
             <nav className="hidden md:flex">
                 <ul className="flex gap-6">
                     <Link to='/'>Report Now</Link>
