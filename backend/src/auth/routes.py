@@ -24,7 +24,7 @@ async def get_user(user_uid: str, session: AsyncSession = Depends(get_session)) 
     
     if user:
         return user
-    else:    
+    else:
         raise HTTPException(status.HTTP_404_NOT_FOUND, detail=f"User not found")
 
 

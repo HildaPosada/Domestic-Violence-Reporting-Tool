@@ -1,7 +1,9 @@
 # from ast import Index
-from sqlmodel import SQLModel, Field, Column, Index
+from sqlmodel import SQLModel, Field, Column, Index, Relationship
 import sqlalchemy.dialects.postgresql as pg
 from datetime import datetime
+from typing import List
+from src.report.models import Report
 import uuid
 
 
@@ -19,6 +21,7 @@ class User(SQLModel, table=True):
     )
     username: str
     is_active: bool = Field(default=True)
+    reports: List["Report"] = Relationship(back_populates="users")
     created_at: datetime = Field(sa_column=Column(pg.TIMESTAMP, default=datetime.now))
     updated_at: datetime = Field(sa_column=Column(pg.TIMESTAMP, default=datetime.now))
 
