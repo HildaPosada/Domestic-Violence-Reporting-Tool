@@ -51,5 +51,5 @@ class Follow_Up_Reports(SQLModel, table=True):
 
 
     def __repr__(self):
-        return f"<Follow up {self.description}>"
+        return f"<Follow up {self.description}"
     
