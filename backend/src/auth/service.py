@@ -63,7 +63,7 @@ class UserService:
     
 
     async def update_user(self, user_uid: str, update_user_data: UserUpdateModel, session: AsyncSession):
-        user_to_update = await self.get_user(user_uid, session)
+        user_to_update = await self.get_user_by_id(user_uid, session)
 
         if user_to_update is not None:
             update_data_dict = update_user_data.model_dump()
@@ -80,7 +80,7 @@ class UserService:
 
     async def delete_user(self, user_uid: str, session: AsyncSession):
 
-        user_to_delete = await self.get_user(user_uid, session)
+        user_to_delete = await self.get_user_by_id(user_uid, session)
 
         if user_to_delete is not None:
             await session.delete(user_to_delete)
