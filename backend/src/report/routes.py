@@ -9,8 +9,13 @@ report_router = APIRouter()
 report_service = ReportService()
 
 #region REPORT ENDPOINTS
+@report_router.get("/", response_model=List[ReportResponseModel])
+async def get_all_reports(session: AsyncSession = Depends(get_session)) -> dict:
+    result = await report_service.get_all_reports(session)
+    return result
+
 @report_router.get("/{username}", status_code=status.HTTP_200_OK, response_model=List[ReportResponseModel])
-async def get_all_reports(username: str, session: AsyncSession = Depends(get_session)) -> dict:
+async def get_all_user_reports(username: str, session: AsyncSession = Depends(get_session)) -> dict:
     result = await report_service.get_all_user_reports(username, session)
     return result
 
@@ -22,6 +27,11 @@ async def get_report(report_id: str, session: AsyncSession = Depends(get_session
 @report_router.post("/create-report/{user_id}", status_code=status.HTTP_201_CREATED)
 async def create_report(user_id: str, user_data: ReportCreateModel, session: AsyncSession = Depends(get_session)) -> dict:
     result = await report_service.create_report(user_id, user_data, session)
+    return result
+
+@report_router.post("/create-anonymous", status_code=status.HTTP_201_CREATED)
+async def create_report(user_data: ReportCreateModel, session: AsyncSession = Depends(get_session)) -> dict:
+    result = await report_service.create_report(user_data, session)
     return result
 
 @report_router.put("/update/{user_id}/{report_id}", status_code=status.HTTP_200_OK)

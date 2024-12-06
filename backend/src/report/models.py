@@ -27,6 +27,7 @@ class Report(SQLModel, table=True):
 
     follow_up_reports: List["src.report.models.Follow_Up_Reports"] = Relationship(back_populates="report")
     user: Optional["src.auth.models.User"] = Relationship(back_populates="reports")
+    agency: "src.agency.models.Agency" = Relationship(back_populates="reports")
 
     def __repr__(self):
         return f"<Report {self.description}"

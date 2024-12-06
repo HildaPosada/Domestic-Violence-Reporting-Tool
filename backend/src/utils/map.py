@@ -26,5 +26,3 @@ def all_follow_ups(follow_ups):
         for follow_up in follow_ups
     ]
     return response_model
-
-
