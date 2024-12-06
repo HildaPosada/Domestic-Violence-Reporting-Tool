@@ -3,7 +3,7 @@ from sqlmodel import SQLModel, Field, Column, Index, Relationship
 import sqlalchemy.dialects.postgresql as pg
 from datetime import datetime
 from typing import List
-from src.report.models import Report
+import src 
 import uuid
 
 
@@ -21,7 +21,7 @@ class User(SQLModel, table=True):
     )
     username: str
     is_active: bool = Field(default=True)
-    reports: List["Report"] = Relationship(back_populates="users")
+    reports: List["src.report.models.Report"] = Relationship(back_populates="user")
     created_at: datetime = Field(sa_column=Column(pg.TIMESTAMP, default=datetime.now))
     updated_at: datetime = Field(sa_column=Column(pg.TIMESTAMP, default=datetime.now))
 
