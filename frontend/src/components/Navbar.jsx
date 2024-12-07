@@ -11,10 +11,10 @@ export default function Navbar() {
     }
 
     return(
-        <div className="p-6 md:p-8 flex justify-between items-center text-white md:w-full md:max-w-[1280px] md:mx-auto relative">
-            <img src="/logo.png" alt="Logo" className="h-8 w-8 md:h-10 md:w-10 object-contain" />
+        <div className="p-6 md:p-4 flex justify-between items-center text-white md:w-full md:max-w-[1280px] md:mx-auto relative">
+            <img src="/logo.png" alt="Logo" className="h-12 w-12 md:h-16 md:w-16 object-contain" />
             <nav className="hidden md:flex">
-                <ul className="flex gap-6">
+                <ul className="flex gap-8">
                     <Link to='/'>Report Now</Link>
                     <Link to='/resources'>Resources</Link>
                     <Link to='/safetyTips'>Safety Tips</Link>
