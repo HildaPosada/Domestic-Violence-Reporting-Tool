@@ -6,6 +6,7 @@ from datetime import datetime
 from typing import Optional, List
 import src
 from src.utils.custom_uuid import short_id
+from src.agency.models import Agency
 
 
 
@@ -27,7 +28,7 @@ class Report(SQLModel, table=True):
 
     follow_up_reports: List["src.report.models.Follow_Up_Reports"] = Relationship(back_populates="report")
     user: Optional["src.auth.models.User"] = Relationship(back_populates="reports")
-    agency: "src.agency.models.Agency" = Relationship(back_populates="reports")
+    agency: "Agency" = Relationship(back_populates="reports")
 
     def __repr__(self):
         return f"<Report {self.description}"

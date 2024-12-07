@@ -10,6 +10,7 @@ from src.utils import custom_uuid
 from src.utils.map import all_reports, all_follow_ups
 from src.auth.service import UserService
 from src.exception_handler.global_exception import NotFoundException
+import uuid
 
 
 class ReportService:
@@ -35,6 +36,8 @@ class ReportService:
 
         response = result.all()
 
+        print(response)
+
         if response is None:
             return NotFoundException(
                 status.HTTP_404_NOT_FOUND,
@@ -46,7 +49,7 @@ class ReportService:
         return response_model
 
     # get single report
-    async def get_report(self, report_id: str, session: AsyncSession):
+    async def get_report(self, report_id: uuid.UUID, session: AsyncSession):
         query = select(Report).where(Report.uid == report_id and Report.is_active).options(joinedload(Report.follow_up_reports))
 
         result = await session.exec(query)
@@ -61,7 +64,7 @@ class ReportService:
         return response_model
 
     # create a report
-    async def create_report(self, user_uid: str | None, model: ReportCreateModel, session: AsyncSession):
+    async def create_report(self, user_uid: uuid.UUID | None, model: ReportCreateModel, session: AsyncSession):
 
         if user_uid is None:
             new_report = Report(
@@ -98,7 +101,7 @@ class ReportService:
         return status.HTTP_201_CREATED
 
     # update report
-    async def update_report(self, user_id: str, report_id: str, model: ReportCreateModel, session: AsyncSession):
+    async def update_report(self, user_id: uuid.UUID, report_id: str, model: ReportCreateModel, session: AsyncSession):
         user = UserService.get_user_by_id(user_id, session)
 
         if user is None: 
