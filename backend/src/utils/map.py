@@ -1,5 +1,6 @@
 from src.report.schemas import ReportResponseModel
 from src.report.schemas import Follow_Up_Response_Model
+from src.agency.schemas import AgencyResponseModel
 
 def all_reports(reports):
     response_models = [
@@ -24,5 +25,21 @@ def all_follow_ups(follow_ups):
             date_created=follow_up.created_at
         )
         for follow_up in follow_ups
+    ]
+    return response_model
+
+
+def all_agencies(agencies):
+    response_model = [
+        AgencyResponseModel(
+            agency_id=agency.uid,
+            agency_name=agency.agency_name,
+            agency_type=agency.agency_type,
+            email=agency.email,
+            phone_number=agency.phone,
+            date_created=agency.created_at,
+            reports=agency.reports
+        )
+        for agency in agencies
     ]
     return response_model
