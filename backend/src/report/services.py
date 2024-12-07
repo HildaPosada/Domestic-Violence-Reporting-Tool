@@ -10,6 +10,7 @@ from src.utils import custom_uuid
 from src.utils.map import all_reports, all_follow_ups
 from src.auth.service import UserService
 from src.exception_handler.global_exception import NotFoundException
+import uuid
 
 
 class ReportService:
@@ -35,6 +36,8 @@ class ReportService:
 
         response = result.all()
 
+        print(response)
+
         if response is None:
             raise NotFoundException(
                 status.HTTP_404_NOT_FOUND,
@@ -46,7 +49,7 @@ class ReportService:
         return response_model
 
     # get single report
-    async def get_report(self, report_id: str, session: AsyncSession):
+    async def get_report(self, report_id: uuid.UUID, session: AsyncSession):
         query = select(Report).where(Report.uid == report_id and Report.is_active).options(joinedload(Report.follow_up_reports))
 
         result = await session.exec(query)

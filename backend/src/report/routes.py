@@ -11,7 +11,7 @@ report_service = ReportService()
 
 #region REPORT ENDPOINTS
 @report_router.get("/", response_model=List[ReportResponseModel])
-async def get_all_reports(session: AsyncSession = Depends(get_session)) -> dict:
+async def get_all_reports(session: AsyncSession = Depends(get_session)):
     result = await report_service.get_all_reports(session)
     return result
 
@@ -21,7 +21,7 @@ async def get_all_user_reports(username: str, session: AsyncSession = Depends(ge
     return result
 
 @report_router.get("/{report_id}", status_code=status.HTTP_200_OK, response_model=ReportResponseModel)
-async def get_report(report_id: str, session: AsyncSession = Depends(get_session)) -> dict:
+async def get_report(report_id: uuid.UUID, session: AsyncSession = Depends(get_session)) -> dict:
     result = await report_service.get_report(report_id, session)
     return result
 
@@ -48,7 +48,7 @@ async def create_anonymous_report(user_data: ReportCreateModel, session: AsyncSe
     return {"reportId": report_id}
 
 @report_router.put("/update/{user_id}/{report_id}", status_code=status.HTTP_200_OK)
-async def update_report(user_id: str, report_id: str, user_data: ReportCreateModel, session: AsyncSession = Depends(get_session)) -> dict:
+async def update_report(user_id: uuid.UUID, report_id: str, user_data: ReportCreateModel, session: AsyncSession = Depends(get_session)) -> dict:
     result = await report_service.update_report(user_id, report_id, user_data, session)
     return result
 #endregion
