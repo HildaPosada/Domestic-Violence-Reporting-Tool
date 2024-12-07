@@ -4,6 +4,7 @@ from src.report.services import ReportService
 from src.report.schemas import ReportCreateModel, ReportResponseModel, Follow_Up_Create_Model, Follow_Up_Response_Model
 from src.db.main import get_session
 from typing import List
+import uuid
 
 report_router = APIRouter()
 report_service = ReportService()
@@ -24,15 +25,27 @@ async def get_report(report_id: str, session: AsyncSession = Depends(get_session
     result = await report_service.get_report(report_id, session)
     return result
 
-@report_router.post("/create-report/{user_id}", status_code=status.HTTP_201_CREATED)
+@report_router.post("/create-report/{user_id}", status_code=status.HTTP_201_CREATED, response_model=dict)
 async def create_report(user_id: str, user_data: ReportCreateModel, session: AsyncSession = Depends(get_session)) -> dict:
-    result = await report_service.create_report(user_id, user_data, session)
-    return result
+    # Generate a unique report ID
+    report_id = f"RPT-{uuid.uuid4().hex[:6].upper()}"
+    
+    # Call the service layer to create the report
+    await report_service.create_report(user_id, user_data, report_id, session)
 
-@report_router.post("/create-anonymous", status_code=status.HTTP_201_CREATED)
-async def create_report(user_data: ReportCreateModel, session: AsyncSession = Depends(get_session)) -> dict:
-    result = await report_service.create_report(user_data, session)
-    return result
+    # Return the generated report ID in the response
+    return {"reportId": report_id}
+
+@report_router.post("/create-anonymous", status_code=status.HTTP_201_CREATED, response_model=dict)
+async def create_anonymous_report(user_data: ReportCreateModel, session: AsyncSession = Depends(get_session)) -> dict:
+    # Generate a unique report ID
+    report_id = f"RPT-{uuid.uuid4().hex[:6].upper()}"
+    
+    # Call the service layer to create the report
+    await report_service.create_report(None, user_data, report_id, session)
+
+    # Return the generated report ID in the response
+    return {"reportId": report_id}
 
 @report_router.put("/update/{user_id}/{report_id}", status_code=status.HTTP_200_OK)
 async def update_report(user_id: str, report_id: str, user_data: ReportCreateModel, session: AsyncSession = Depends(get_session)) -> dict:
