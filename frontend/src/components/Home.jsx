@@ -16,7 +16,7 @@ export default function Home() {
         const description = e.target.description.value; // Grab description from textarea
 
         try {
-            const response = await fetch("https://your-backend-url.onrender.com/api/reports", {
+            const response = await fetch("https://your-backend-url.onrender.com/api/reports/create-anonymous", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -36,8 +36,7 @@ export default function Home() {
     };
 
     return (
-        <div className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-b from- to-">
-
+        <div className="flex justify-center items-center h-[500px] md:h-[550px] mt-8 w-full">
             {/* Form Container */}
             <form
                 onSubmit={handleSubmit}
@@ -53,6 +52,7 @@ export default function Home() {
                         name="description"
                         placeholder="Describe the incident..."
                         className="w-full h-[200px] border-2 border-solid border-gray-300 outline-none rounded-md p-4 md:text-base text-sm text-gray-700 mt-2 resize-none"
+                        required
                     ></textarea>
                 </div>
 
