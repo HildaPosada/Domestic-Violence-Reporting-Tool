@@ -36,7 +36,7 @@ export default function Home() {
     };
 
     return (
-        <div className="flex justify-center items-center h-[500px] md:h-[550px] mt-8 w-full">
+        <div className="flex justify-center items-center h-[500px] md:h-[550px] mt-4 w-full">
             {/* Form Container */}
             <form
                 onSubmit={handleSubmit}
