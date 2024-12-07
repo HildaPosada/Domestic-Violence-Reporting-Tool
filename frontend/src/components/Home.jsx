@@ -14,15 +14,19 @@ export default function Home() {
     const handleSubmit = async (e) => {
         e.preventDefault(); // Prevent page refresh
         const description = e.target.description.value; // Grab description from textarea
+        const agency_id = "3fa85f64-5717-4562-b3fc-2c963f66afa6"; // Replace with a valid agency ID
 
         try {
-            const response = await fetch("https://your-backend-url.onrender.com/api/reports/create-anonymous", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ description }), // Send description as JSON
-            });
+            const response = await fetch(
+                "https://domestic-violence-reporting-tool-m1sd.onrender.com/api/v1/reports/create-anonymous",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ description, agency_id }), // Include both fields
+                }
+            );
 
             if (response.ok) {
                 const data = await response.json(); // Parse backend response
