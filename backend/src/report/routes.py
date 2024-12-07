@@ -27,24 +27,12 @@ async def get_report(report_id: uuid.UUID, session: AsyncSession = Depends(get_s
 
 @report_router.post("/create-report/{user_id}", status_code=status.HTTP_201_CREATED, response_model=dict)
 async def create_report(user_id: str, user_data: ReportCreateModel, session: AsyncSession = Depends(get_session)) -> dict:
-    # Generate a unique report ID
-    report_id = f"RPT-{uuid.uuid4().hex[:6].upper()}"
-    
-    # Call the service layer to create the report
-    await report_service.create_report(user_id, user_data, report_id, session)
-
-    # Return the generated report ID in the response
+    report_id = await report_service.create_report(user_id, user_data, session)
     return {"reportId": report_id}
 
 @report_router.post("/create-anonymous", status_code=status.HTTP_201_CREATED, response_model=dict)
 async def create_anonymous_report(user_data: ReportCreateModel, session: AsyncSession = Depends(get_session)) -> dict:
-    # Generate a unique report ID
-    report_id = f"RPT-{uuid.uuid4().hex[:6].upper()}"
-    
-    # Call the service layer to create the report
-    await report_service.create_report(None, user_data, report_id, session)
-
-    # Return the generated report ID in the response
+    report_id = await report_service.create_report(None, user_data, session)
     return {"reportId": report_id}
 
 @report_router.put("/update/{user_id}/{report_id}", status_code=status.HTTP_200_OK)
