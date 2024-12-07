@@ -23,7 +23,7 @@ class ReportService:
         response = result.all()
 
         if response is None:
-            return NotFoundException(status.HTTP_404_NOT_FOUND, detail=f"No report found for user")
+            raise NotFoundException(status.HTTP_404_NOT_FOUND, detail=f"No report found for user")
 
         response_models = all_reports(response)
 
@@ -39,7 +39,7 @@ class ReportService:
         print(response)
 
         if response is None:
-            return NotFoundException(
+            raise NotFoundException(
                 status.HTTP_404_NOT_FOUND,
                 detail=f"No report available"
             )
@@ -57,18 +57,20 @@ class ReportService:
         report = result.first()
 
         if report is None:
-            return NotFoundException(status.HTTP_404_NOT_FOUND, detail=f"Report with id ({report_id}) not found")
+            raise NotFoundException(status.HTTP_404_NOT_FOUND, detail=f"Report with id ({report_id}) not found")
 
         response_model = all_reports([report])
 
         return response_model
 
     # create a report
-    async def create_report(self, user_uid: uuid.UUID | None, model: ReportCreateModel, session: AsyncSession):
+    async def create_report(self, user_uid: str | None, model: ReportCreateModel, session: AsyncSession) -> str:
+        # Generate a custom report ID
+        report_id = custom_uuid.short_id  # Ensure this generates unique IDs
 
         if user_uid is None:
             new_report = Report(
-                uid=custom_uuid.short_id,
+                uid=report_id,  # Use the generated report ID
                 description=model.description,
                 agency_uid=model.agency_id,
                 user_uid=None,
@@ -76,36 +78,35 @@ class ReportService:
             )
 
             session.add(new_report)
-
             await session.commit()
 
-            return status.HTTP_201_CREATED
+            # Return the generated report ID
+            return report_id
 
-        user = UserService.get_user_by_id(user_uid, session)
-
+        user = await UserService.get_user_by_id(user_uid, session)  # Make sure this is `await`
         if user is None:
-            return NotFoundException(status.HTTP_404_NOT_FOUND, detail="User not found")
+            raise NotFoundException(status.HTTP_404_NOT_FOUND, detail="User not found")
 
         new_report = Report(
-            uid=custom_uuid.short_id,
+            uid=report_id,  # Use the generated report ID
             description=model.description,
             agency_uid=model.agency_id,
             user_uid=user_uid,
-            is_active=True
+            is_active=True,
         )
 
         session.add(new_report)
-
         await session.commit()
 
-        return status.HTTP_201_CREATED
+        # Return the generated report ID
+        return report_id
 
     # update report
-    async def update_report(self, user_id: uuid.UUID, report_id: str, model: ReportCreateModel, session: AsyncSession):
-        user = UserService.get_user_by_id(user_id, session)
+    async def update_report(self, user_id: str, report_id: str, model: ReportCreateModel, session: AsyncSession):
+        user = await UserService.get_user_by_id(user_id, session)
 
         if user is None: 
-            return NotFoundException(status.HTTP_404_NOT_FOUND, detail="User not found")
+            raise NotFoundException(status.HTTP_404_NOT_FOUND, detail="User not found")
 
         query = select(Report).where(Report.uid == report_id and Report.is_active)
 
@@ -114,44 +115,19 @@ class ReportService:
         report = result.first()
 
         if report is None:
-            return NotFoundException(status.HTTP_404_NOT_FOUND, detail="Report not found")
+            raise NotFoundException(status.HTTP_404_NOT_FOUND, detail="Report not found")
 
         report.description = model.description
         report.agency_uid = model.agency_id
 
         session.add(report)
-
         await session.commit()
 
         return status.HTTP_200_OK 
 
-    # delete report
-    # async def delete_report(self, user_id: str, report_id: str, session: AsyncSession):
-    #     user = UserService.get_user_by_id(user_id, session)
-
-    #     if user is None:
-    #         return HTTPException(status.HTTP_404_NOT_FOUND, detail="User not found")
-
-    #     query = select(Report).where(Report.uid == report_id and Report.is_active)
-
-    #     result = await session.exec(query)
-
-    #     if not query:
-    #         return HTTPException(status.HTTP_404_NOT_FOUND, detail="Report not found")
-
-    #     report = result.first()
-
-    #     report.is_active = False
-
-    #     session.add(report)
-
-    #     await session.commit()
-
-    #     return status.HTTP_201_CREATED
-
     # add additional report
     async def add_follow_up(self, report_id: str, model: Follow_Up_Create_Model, session: AsyncSession):
-        report = self.get_report(report_id, session)
+        report = await self.get_report(report_id, session)
 
         if report:
             follow_up = Follow_Up_Reports(
@@ -161,12 +137,11 @@ class ReportService:
             )
 
             session.add(follow_up)
-
             await session.commit()
 
             return status.HTTP_201_CREATED 
         else:
-            return NotFoundException(status.HTTP_404_NOT_FOUND, detail="Report not found")
+            raise NotFoundException(status.HTTP_404_NOT_FOUND, detail="Report not found")
 
     async def get_all_follow_ups(self, report_id: str, session: AsyncSession):
         query = select(Follow_Up_Reports).where(Follow_Up_Reports.uid == report_id and Follow_Up_Reports.is_active)
@@ -176,7 +151,7 @@ class ReportService:
         response = result.all()
 
         if response is None:
-            return NotFoundException(status.HTTP_404_NOT_FOUND, detail="No follow up report found")
+            raise NotFoundException(status.HTTP_404_NOT_FOUND, detail="No follow up report found")
 
         follow_ups = all_follow_ups(response)
 
