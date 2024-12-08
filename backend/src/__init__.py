@@ -24,9 +24,9 @@ app = FastAPI(
 )
 
 origins = [
-    "http://localhost:5174/",
-    "http://localhost:5173/",
-    "https://domestic-violence-reporting-tool.vercel.app/",
+    "http://localhost:5174",
+    "http://localhost:5173",
+    "https://domestic-violence-reporting-tool.vercel.app",
 ]
 
 app.add_middleware(
