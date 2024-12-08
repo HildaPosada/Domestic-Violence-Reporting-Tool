@@ -6,6 +6,7 @@ from datetime import datetime
 from typing import Optional, List
 from src.utils.custom_uuid import short_id
 from src.agency.models import Agency
+import src
 
 
 class Report(SQLModel, table=True):

@@ -37,6 +37,7 @@ def all_agencies(agencies):
             agency_type=agency.agency_type,
             email=agency.email,
             phone_number=agency.phone,
+            address=agency.address,
             date_created=agency.created_at,
             reports=agency.reports
         )
