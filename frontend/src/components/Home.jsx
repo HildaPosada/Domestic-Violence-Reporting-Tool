@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { IoIosAddCircle, IoIosRemoveCircle } from "react-icons/io";
 import { IoMicOutline } from "react-icons/io5";
 import { CiFileOn } from "react-icons/ci";
+import { useNavigate } from "react-router-dom"; // For navigation
 
 export default function Home() {
     const [reportId, setReportId] = useState(""); // State for the Report ID
@@ -10,6 +11,7 @@ export default function Home() {
     const [file, setFile] = useState(null); // State for uploaded file
     const mediaRecorder = useRef(null); // Ref for MediaRecorder
     const [recording, setRecording] = useState(false); // State for recording status
+    const navigate = useNavigate(); // Hook for programmatic navigation
 
     const handleUploadState = () => {
         setUpload(!upload); // Toggle upload options
@@ -147,11 +149,11 @@ export default function Home() {
                         <p>Upload</p>
                     </div>
 
-                    {/* Report History Button */}
+                    {/* Follow-Up Reports Button */}
                     <button
                         type="button"
                         className="h-[40px] px-4 bg-blue-500 text-white rounded-md shadow hover:bg-blue-600 transition"
-                        onClick={() => (window.location.href = "/follow-up-reports")}
+                        onClick={() => navigate("/follow-up-reports")}
                     >
                         Follow-Up Reports
                     </button>
