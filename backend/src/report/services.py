@@ -46,13 +46,14 @@ class ReportService:
         
         return all_reports([report])
 
-    async def create_report(self, user_uid: str | None, model: ReportCreateModel, session: AsyncSession) -> str:
-        report_id = custom_uuid.short_id  # Generate unique ID
+    async def create_report(self, model: ReportCreateModel, session: AsyncSession) -> str:
+        print(f"Create Report: {model}")
+        report_id = str(custom_uuid.short_id())  # Generate unique ID
         new_report = Report(
             uid=report_id,
             description=model.description,
             agency_uid=model.agency_id,
-            user_uid=user_uid,
+            username=model.username,
             is_active=True,
         )
 

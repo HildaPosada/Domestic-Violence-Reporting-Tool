@@ -10,3 +10,5 @@ def short_id():
 
     # Take the first 8 characters of the hash for a shorter ID
     short_id = hashed_id[:8]
+
+    return short_id

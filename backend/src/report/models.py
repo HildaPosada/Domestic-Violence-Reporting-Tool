@@ -17,9 +17,9 @@ class Report(SQLModel, table=True):
             sa_types.String(8), nullable=False, primary_key=True, default=short_id
         )
     )
-
+    username: Optional[str] = Field(default="Anonymous") # Can be deleted later
     description: str = Field(nullable=False)
-    agency_uid: uuid.UUID = Field(foreign_key="agencies.uid", nullable=False)
+    agency_uid: uuid.UUID = Field(foreign_key="agencies.uid", nullable=False, default="3fa85f64-5717-4562-b3fc-2c963f66afa6")
     user_uid: Optional[uuid.UUID] = Field(foreign_key="users.uid", nullable=True)  # Allow user_uid to be optional for anonymous reports
     is_active: bool = Field(default=True)  # Changed default to `True` to reflect active reports
     created_at: datetime = Field(sa_column=Column(pg.TIMESTAMP, default=datetime.now, nullable=False))

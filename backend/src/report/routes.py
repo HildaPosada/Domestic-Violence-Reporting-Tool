@@ -25,15 +25,16 @@ async def get_report(report_id: uuid.UUID, session: AsyncSession = Depends(get_s
     result = await report_service.get_report(report_id, session)
     return result
 
-@report_router.post("/create-report/{user_id}", status_code=status.HTTP_201_CREATED, response_model=dict)
-async def create_report(user_id: str, user_data: ReportCreateModel, session: AsyncSession = Depends(get_session)) -> dict:
-    report_id = await report_service.create_report(user_id, user_data, session)
+@report_router.post("/create-report", status_code=status.HTTP_201_CREATED, response_model=dict)
+async def create_report(user_data: ReportCreateModel, session: AsyncSession = Depends(get_session)) -> dict:
+    print(f"Create Report Route Level: {user_data}")
+    report_id = await report_service.create_report(user_data, session)
     return {"reportId": report_id}
 
-@report_router.post("/create-anonymous", status_code=status.HTTP_201_CREATED, response_model=dict)
-async def create_anonymous_report(user_data: ReportCreateModel, session: AsyncSession = Depends(get_session)) -> dict:
-    report_id = await report_service.create_report(None, user_data, session)
-    return {"reportId": report_id}
+# @report_router.post("/create-anonymous", status_code=status.HTTP_201_CREATED, response_model=dict)
+# async def create_anonymous_report(user_data: ReportCreateModel, session: AsyncSession = Depends(get_session)) -> dict:
+#     report_id = await report_service.create_report(None, user_data, session)
+#     return {"reportId": report_id}
 
 @report_router.put("/update/{user_id}/{report_id}", status_code=status.HTTP_200_OK)
 async def update_report(user_id: uuid.UUID, report_id: str, user_data: ReportCreateModel, session: AsyncSession = Depends(get_session)) -> dict:

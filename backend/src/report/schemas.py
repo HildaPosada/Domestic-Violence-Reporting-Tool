@@ -21,6 +21,7 @@ class Follow_Up_Response_Model(BaseModel):
 
 # Schema for creating a report
 class ReportCreateModel(BaseModel):
+    username: str = Field(default="Anonymous")
     description: str = Field(..., example="This is a description of the incident.")
     agency_id: uuid.UUID = Field(..., example="3fa85f64-5717-4562-b3fc-2c963f66afa6")
 

@@ -37,7 +37,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.add_exception_handler(Exception, global_exception_handler)
+# app.add_exception_handler(Exception, global_exception_handler)
 
 @app.get("/")
 def root():

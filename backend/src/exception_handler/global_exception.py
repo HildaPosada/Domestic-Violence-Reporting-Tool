@@ -18,6 +18,7 @@ async def global_exception_handler(request: Request, ex: Exception):
             }
         )
     
+   
     return JSONResponse(
         status_code=500,
         content={
