@@ -112,7 +112,7 @@ export default function Home() {
                         type="text"
                         id="userId"
                         name="userId"
-                        placeholder="Enter your name"
+                        placeholder="Enter username"
                         className="w-full h-[40px] border-2 border-solid border-gray-300 outline-none rounded-md p-4 md:text-base text-sm text-gray-700 mt-1"
                         required
                     />
@@ -133,17 +133,30 @@ export default function Home() {
                 </div>
 
                 {/* Upload Section */}
-                <div
-                    className="flex items-center gap-1 text-sm w-20 transform transition-all duration-500 ease-in-out cursor-pointer"
-                    onClick={handleUploadState}
-                >
-                    {upload ? (
-                        <IoIosRemoveCircle className="bg-white rounded-full text-purple-700 h-7 w-7 transition-all duration-500 ease-in-out" />
-                    ) : (
-                        <IoIosAddCircle className="bg-white rounded-full text-purple-700 h-7 w-7 transition-all duration-500 ease-in-out" />
-                    )}
-                    <p>Upload</p>
+                <div className="flex justify-between items-center">
+                    {/* Upload Button */}
+                    <div
+                        className="flex items-center gap-1 text-sm w-20 transform transition-all duration-500 ease-in-out cursor-pointer"
+                        onClick={handleUploadState}
+                    >
+                        {upload ? (
+                            <IoIosRemoveCircle className="bg-white rounded-full text-purple-700 h-7 w-7 transition-all duration-500 ease-in-out" />
+                        ) : (
+                            <IoIosAddCircle className="bg-white rounded-full text-purple-700 h-7 w-7 transition-all duration-500 ease-in-out" />
+                        )}
+                        <p>Upload</p>
+                    </div>
+
+                    {/* Report History Button */}
+                    <button
+                        type="button"
+                        className="h-[40px] px-4 bg-blue-500 text-white rounded-md shadow hover:bg-blue-600 transition"
+                        onClick={() => (window.location.href = "/follow-up-reports")}
+                    >
+                        Follow-Up Reports
+                    </button>
                 </div>
+
                 <div
                     className={`bg-blue-600 w-44 rounded-md h-20 flex justify-center items-start flex-col py-6 pl-2 gap-2 text-white absolute bottom-44 left-14 transform transition-all duration-500 ease-in-out ${
                         upload ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"
