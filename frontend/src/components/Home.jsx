@@ -13,8 +13,12 @@ export default function Home() {
 
     const handleSubmit = async (e) => {
         e.preventDefault(); // Prevent page refresh
+
+        // Capture form data
         const description = e.target.description.value; // Grab description from textarea
-        const agency_id = "3fa85f64-5717-4562-b3fc-2c963f66afa6"; // Replace with a valid agency ID
+        const agency_id = "3fa85f64-5717-4562-b3fc-2c963f66afa6"; // Replace with valid agency UUID
+
+        console.log("Submitting report:", { description, agency_id });
 
         try {
             const response = await fetch(
@@ -28,11 +32,15 @@ export default function Home() {
                 }
             );
 
+            console.log("Response status:", response.status);
+
             if (response.ok) {
                 const data = await response.json(); // Parse backend response
                 setReportId(data.reportId); // Save the Report ID
+                console.log("Report successfully created with ID:", data.reportId);
             } else {
-                console.error("Failed to submit report");
+                const errorData = await response.json();
+                console.error("Failed to submit report:", errorData.message || response.statusText);
             }
         } catch (error) {
             console.error("Error submitting report:", error);
