@@ -22,7 +22,7 @@ class ReportService:
         response = result.all()
 
         if not response:
-            raise NotFoundException(status.HTTP_404_NOT_FOUND, detail=f"No report found for user")
+            raise NotFoundException(status.HTTP_404_NOT_FOUND,  "No report found for user")
         
         return all_reports(response)
 
@@ -32,7 +32,7 @@ class ReportService:
         response = result.all()
 
         if not response:
-            raise NotFoundException(status.HTTP_404_NOT_FOUND, detail=f"No reports available")
+            raise NotFoundException(status.HTTP_404_NOT_FOUND, "No reports available")
         
         return all_reports(response)
 
@@ -42,7 +42,7 @@ class ReportService:
         report = result.first()
 
         if not report:
-            raise NotFoundException(status.HTTP_404_NOT_FOUND, detail=f"Report with id ({report_id}) not found")
+            raise NotFoundException(status.HTTP_404_NOT_FOUND,  f"Report with id ({report_id}) not found")
         
         return all_reports([report])
 
@@ -64,14 +64,14 @@ class ReportService:
     async def update_report(self, user_id: str, report_id: str, model: ReportCreateModel, session: AsyncSession):
         user = await UserService.get_user_by_id(user_id, session)
         if not user:
-            raise NotFoundException(status.HTTP_404_NOT_FOUND, detail="User not found")
+            raise NotFoundException(status.HTTP_404_NOT_FOUND,  "User not found")
 
         query = select(Report).where(Report.uid == report_id, Report.is_active)
         result = await session.exec(query)
-        report = result.first()
+        report = result.one_or_none()
 
         if not report:
-            raise NotFoundException(status.HTTP_404_NOT_FOUND, detail="Report not found")
+            raise NotFoundException(status.HTTP_404_NOT_FOUND,  "Report not found")
 
         report.description = model.description
         report.agency_uid = model.agency_id
@@ -93,14 +93,14 @@ class ReportService:
             await session.commit()
             return status.HTTP_201_CREATED
         else:
-            raise NotFoundException(status.HTTP_404_NOT_FOUND, detail="Report not found")
+            raise NotFoundException(status.HTTP_404_NOT_FOUND,  "Report not found")
 
     async def get_all_follow_ups(self, report_id: str, session: AsyncSession):
-        query = select(Follow_Up_Reports).where(Follow_Up_Reports.report_id == report_id, Follow_Up_Reports.is_active)
+        query = select(Follow_Up_Reports).where(Follow_Up_Reports.report_uid == report_id, Follow_Up_Reports.is_active)
         result = await session.exec(query)
         response = result.all()
 
         if not response:
-            raise NotFoundException(status.HTTP_404_NOT_FOUND, detail="No follow-up reports found")
+            raise NotFoundException(status.HTTP_404_NOT_FOUND, "No follow-up reports found")
         
         return all_follow_ups(response)
