@@ -36,3 +36,23 @@ This helps in organizing the code, making it more maintainable, scalable, and ea
 ### **About the Frontend folder**
 
 ### **About the Backend folder**
+In the backend, we have the ".venv" which is our folder for the virtual environment to isolate the packages 
+we install for each project. 
+
+The "requirements.txt" file which holds all the packages we installed. 
+
+The ".env" file which holds our connection string to the serverless postgresql on neon.
+
+Next, we have the "migrations" folder. Which holds the history of all the migrations we created using Alembic
+as our migration tool.
+
+Furthermore, we have the "src" folder. In it we have the "agency" folder which has the Agency model, 
+the Services regarding to the Agency model. The routes and the schemas. The same applies to the "report" and "auth folder.
+Which handles reporting and user creation.
+
+We also the "exception_handler" folder, which handles custom exception and global exceptions. 
+So that we wouldn't be sending out verbose error messages.
+
+We have the "utils" folder, that has the utility files. Like the "map" file, the "date formatter" and the "custom_uuid" file to generate unique id for reports.
+
+Lastly, we have the "db" folder that handles session and database initialization.
