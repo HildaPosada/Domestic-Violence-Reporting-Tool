@@ -8,6 +8,12 @@ class NotFoundException(Exception):
         self.status_code = status_code
 
 
+class InvalidException(Exception):
+    def __init__(self, status_code: int, message: str):
+        self.message = message
+        self.status_code = status_code
+
+
 async def global_exception_handler(request: Request, ex: Exception):
     if isinstance(ex, NotFoundException):
         return JSONResponse(
@@ -17,8 +23,12 @@ async def global_exception_handler(request: Request, ex: Exception):
                 "message": ex.message
             }
         )
-    
-   
+
+    if isinstance(ex, InvalidException):
+        return JSONResponse(
+            status_code=ex.status_code, content={"error": True, "message": ex.message}
+        )
+
     return JSONResponse(
         status_code=500,
         content={

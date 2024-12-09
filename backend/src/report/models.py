@@ -7,6 +7,7 @@ from typing import Optional, List
 from src.utils.custom_uuid import short_id
 from src.agency.models import Agency
 import src
+from src.report.enums import ReportProgress
 
 
 class Report(SQLModel, table=True):
@@ -17,16 +18,22 @@ class Report(SQLModel, table=True):
             sa_types.String(8), nullable=False, primary_key=True, default=short_id
         )
     )
-    username: Optional[str] = Field(default="Anonymous") # Can be deleted later
+
+    username: Optional[str] = Field(default="Anonymous")
     description: str = Field(nullable=False)
+    progress: ReportProgress = Field(
+        sa_column=Column(
+            pg.ENUM(ReportProgress, name="report_progress", create_type=True),
+            nullable=False,
+            default=ReportProgress.Submitted
+        )
+    )
     agency_uid: uuid.UUID = Field(foreign_key="agencies.uid", nullable=False, default="3fa85f64-5717-4562-b3fc-2c963f66afa6")
-    user_uid: Optional[uuid.UUID] = Field(foreign_key="users.uid", nullable=True)  # Allow user_uid to be optional for anonymous reports
-    is_active: bool = Field(default=True)  # Changed default to `True` to reflect active reports
+    is_active: bool = Field(default=True)
     created_at: datetime = Field(sa_column=Column(pg.TIMESTAMP, default=datetime.now, nullable=False))
     updated_at: datetime = Field(sa_column=Column(pg.TIMESTAMP, default=datetime.now, onupdate=datetime.now, nullable=False))
 
     follow_up_reports: List["Follow_Up_Reports"] = Relationship(back_populates="report")
-    user: Optional["src.auth.models.User"] = Relationship(back_populates="reports")
     agency: "Agency" = Relationship(back_populates="reports")
 
     def __repr__(self):
@@ -46,7 +53,7 @@ class Follow_Up_Reports(SQLModel, table=True):
     )
     description: str = Field(nullable=False)
     report_uid: str = Field(foreign_key="reports.uid", nullable=False)
-    is_active: bool = Field(default=True)  # Changed default to `True` to reflect active follow-ups
+    is_active: bool = Field(default=True)  
     created_at: datetime = Field(sa_column=Column(pg.TIMESTAMP, default=datetime.now, nullable=False))
     updated_at: datetime = Field(sa_column=Column(pg.TIMESTAMP, default=datetime.now, onupdate=datetime.now, nullable=False))
     report: "Report" = Relationship(back_populates="follow_up_reports")

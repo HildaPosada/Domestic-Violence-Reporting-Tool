@@ -18,10 +18,8 @@ class Agency(SQLModel, table=True):
         sa_column=Column(pg.TEXT, unique=True, nullable=False), max_length=254
     )
     phone: str = Field(sa_column=Column(pg.TEXT), max_length=20)
-    address: str = Field(sa_column=Column(pg.TEXT), max_length=500)
     password_hash: str
     is_activated: bool = Field(default=False)
-    agency_type: str = Field(default="General")
     created_at: datetime = Field(sa_column=Column(pg.TIMESTAMP, default=datetime.now))
     updated_at: datetime = Field(
         sa_column=Column(pg.TIMESTAMP, default=datetime.now, onupdate=datetime.now)

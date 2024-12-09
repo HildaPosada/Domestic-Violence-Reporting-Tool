@@ -37,13 +37,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# app.add_exception_handler(Exception, global_exception_handler)
+app.add_exception_handler(Exception, global_exception_handler)
 
 @app.get("/")
 def root():
     return {"message": "Domestic Violence Reporting Tool"}
 
 
-app.include_router(auth_router, prefix=f"/api/{version}/users", tags=["users"])
+# app.include_router(auth_router, prefix=f"/api/{version}/users", tags=["users"])
 
 app.include_router(report_router, prefix=f"/api/{version}/reports", tags=["reports"])
