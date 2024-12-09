@@ -36,22 +36,24 @@ This helps in organizing the code, making it more maintainable, scalable, and ea
 ### **About the Frontend folder**
 The frontend of our Domestic Violence Reporting Tool is built with modern web technologies, ensuring a user-friendly and responsive interface:
 
-Tech Stack
-Programming Language: JavaScript
-Framework: React
-Styling: Tailwind CSS for sleek and adaptive design.
-State Management: State Hook for efficient component state handling.
-Folder Structure
-src Folder
-agency_ui: Contains interfaces and UI components specific to agencies, enabling smooth navigation and interaction.
-assets: Holds static resources such as images, icons, and other media.
-components: Reusable UI components like buttons, forms, and modals.
-pages: Defines individual pages of the application, ensuring a modular and scalable architecture.
-Key Files
-index.html: The entry point for the application, hosting the root div for React to render components.
-package.json: Manages project dependencies and scripts.
-vercel.json: Configuration file for deployment on Vercel, ensuring streamlined hosting.
-vite.config.js: Configuration file for Vite, enabling fast development builds and optimized production builds.
+**Tech Stack**
+Programming Language: JavaScript  
+Framework: React  
+Styling: Tailwind CSS for sleek and adaptive design.  
+State Management: State Hook for efficient component state handling.  
+
+**Folder Structure**
+src Folder  
+  - agency_ui: Contains interfaces and UI components specific to agencies, enabling smooth navigation and interaction.  
+  - assets: Holds static resources such as images, icons, and other media.  
+  - components: Reusable UI components like buttons, forms, and modals.  
+  - pages: Defines individual pages of the application, ensuring a modular and scalable architecture.  
+
+**Key Files**
+  - index.html: The entry point for the application, hosting the root div for React to render components.
+  - package.json: Manages project dependencies and scripts.
+  - vercel.json: Configuration file for deployment on Vercel, ensuring streamlined hosting.
+  - vite.config.js: Configuration file for Vite, enabling fast development builds and optimized production builds.
 
 ### **About the Backend folder**
 In the backend, we have the ".venv" which is our folder for the virtual environment to isolate the packages 
