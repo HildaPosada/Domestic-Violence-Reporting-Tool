@@ -1,19 +1,28 @@
-# **Domestic Violence Reporting Tool API**
+# **Domestic Violence Reporting Tool**
 
-## **Overview**
+The Domestic Violence Reporting Tool is designed to provide a safe and efficient way for individuals to report incidents of domestic violence. It includes features for anonymous reporting, safety tips, and resources to assist in any incident. This tool aims to empower victims by offering a discreet and accessible platform to seek help and report abuse.
 
-Domestic Violence Reporting Tool API backend
+---
 
 ## **Technologies**
 
-1. ### **Backend:**
+| **Backend**                                   | **Frontend**                                |
+|-----------------------------------------------|---------------------------------------------|
+| **Programming Language:** Python              | **Programming Language:** JavaScript        |
+| **Framework:** FastAPI                        | **Framework:** React                        |
+| **Database:** Neon (Serverless PostgreSQL)    | **Styling:** Tailwind                       |
+| **ORM:** SQLAlchemy                           | **State Management:** State Hook            |
 
-   - **Programming Language:** Python
-   - **Framework:** FastAPI
-   - **Database:** Neon (Serverless PostgreSQL)
+---
 
-2. ### **Frontend:**
-   - **Programming Language:** JavaScript
-   - **Framework:** React
-   - **Styling:** Tailwind
-   - **State Management:**
+## **Team Members**
+
+| **Name**                    | **Location**       | **GitHub Username**                              | **EdX Username**                                  |
+|-----------------------------|-------------------|------------------------------------------------|------------------------------------------------|
+| Hilda Posada                | California, USA    | [HildaPosada](https://github.com/HildaPosada)    | [Hilda's EdX](https://profile.edx.org/u/hildaecogreen_gmail_com) |
+| Tope Taiwo                  | Akure, Nigeria     | [topzyray](https://github.com/topzyray)          | [Tope's EdX](https://profile.edx.org/u/topzyray) |
+| Emmanuel Chiemela Chinonso  | Lagos, Nigeria     | [mellatunez10](https://github.com/mellatunez10)  | — |
+| Olusegun Bamgbelu           | Lagos, Nigeria     | [oluseguncodess](https://github.com/oluseguncodess) | [Olusegun's EdX](https://profile.edx.org/u/ShegzY_) |
+| Wisdom Agbasionye           | Lagos, Nigeria     | [wisdomtochi](https://github.com/wisdomtochi)    | [Wisdom's EdX](https://profile.edx.org/u/wisdom_tochi) |
+
+---
