@@ -36,7 +36,7 @@ This helps in organizing the code, making it more maintainable, scalable, and ea
 ### **About the Frontend folder**
 The frontend of our Domestic Violence Reporting Tool is built with modern web technologies, ensuring a user-friendly and responsive interface:
 
-**Tech Stack**
+**Tech Stack**  
 Programming Language: JavaScript  
 Framework: React  
 Styling: Tailwind CSS for sleek and adaptive design.  
