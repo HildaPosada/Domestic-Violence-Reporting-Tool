@@ -9,6 +9,7 @@ Domestic Violence Reporting Tool API
 - **Programming Language:** Python
 - **Framework:** FastAPI
 - **Database:** Neon (Serverless PostgreSQL)
+- **ORM:** SQLAlchemy
 
 ## Features
 
