@@ -1,6 +1,6 @@
 # **Domestic Violence Reporting Tool**
 
-The Domestic Violence Reporting Tool is designed to provide a safe and efficient way for individuals to report incidents of domestic violence. It includes features for anonymous reporting, safety tips, and resources to assist in any incident. This tool aims to empower victims by offering a discreet and accessible platform to seek help and report abuse. Demo([youtube](https://profile.edx.org/u/hildaecogreen_gmail_com)) recorded 12/9/2024
+The Domestic Violence Reporting Tool is designed to provide a safe and efficient way for individuals to report incidents of domestic violence. It includes features for anonymous reporting, safety tips, and resources to assist in any incident. This tool aims to empower victims by offering a discreet and accessible platform to seek help and report abuse.  Demo([youtube](https://profile.edx.org/u/hildaecogreen_gmail_com)) recorded 12/9/2024.
 
 ---
 
