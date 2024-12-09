@@ -7,10 +7,14 @@ export default function FollowUpReports() {
     const [reportsById, setReportsById] = useState([]); // State for specific report details
     const [loadingByUsername, setLoadingByUsername] = useState(false); // State for loading
     const [loadingByByReportId, setLoadingByByReportId] = useState(false); // State for loading
+    const [errorByUsername, setErrorByUsername] = useState(null)
+    const [errorById, setErrorById] = useState(null)
 
     // Fetch report history by User ID
     const fetchReportsByUsername = async () => {
         setLoadingByUsername(true);
+        setErrorByUsername(null)
+        setReportsByUsername([])
         try {
             const response = await fetch(
                 `${import.meta.env.VITE_BACKEND_API}/api/v1/reports/${username}`
@@ -22,9 +26,11 @@ export default function FollowUpReports() {
             } else {
                 console.error("Failed to fetch reports");
                 setReportsByUsername([]);
+                setErrorByUsername("Username not found!")
             }
         } catch (error) {
             console.error("Error fetching reports:", error);
+            setErrorByUsername(error.message)
         } finally {
             setLoadingByUsername(false);
         }
@@ -33,6 +39,8 @@ export default function FollowUpReports() {
     // Fetch specific report details by Report ID
     const fetchReportById = async () => {
         setLoadingByByReportId(true);
+        setErrorById(null)
+        setReportsById([])
         try {
             const response = await fetch(
                 `${import.meta.env.VITE_BACKEND_API}/api/v1/reports/report/${reportId}`
@@ -43,10 +51,12 @@ export default function FollowUpReports() {
                 setReportsById(data);
             } else {
                 console.error("Failed to fetch report details");
+                setErrorById("Report ID not found!")
                 setReportsById([]);
             }
         } catch (error) {
             console.error("Error fetching report details:", error);
+            setErrorById(error.message)
         } finally {
             setLoadingByByReportId(false);
         }
@@ -94,6 +104,9 @@ export default function FollowUpReports() {
                             </ul>
                         </div>
                     )}
+
+                    {errorByUsername && errorByUsername != null && <p className="text-red-600">{errorByUsername}
+                    </p>}
                 </div>
 
                 {/* Input for Specific Report ID */}
@@ -133,6 +146,9 @@ export default function FollowUpReports() {
                             </ul>
                         </div>
                     )}
+
+                    {errorById && errorById != null && <p className="text-red-600">{errorById}
+                    </p>}
                 </div>
             </div>
         </div>
