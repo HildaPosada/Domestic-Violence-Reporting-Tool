@@ -13,7 +13,9 @@ Domestic Violence Reporting Tool API
 
 ## Features
 
-- Under development
+- Creation of anonymous
+- Getting a user's report history
+- Getting a single report by the report id
 
 ## Installation
 
