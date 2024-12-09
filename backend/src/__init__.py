@@ -6,6 +6,9 @@ from src.auth.routes import auth_router
 from src.report.routes import report_router
 from src.exception_handler.global_exception import global_exception_handler
 
+from src.middeware.logger import LogMiddleware
+
+
 
 @asynccontextmanager
 async def life_span(app: FastAPI):
@@ -33,9 +36,11 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE"],
     allow_headers=["*"],
 )
+
+app.add_middleware(LogMiddleware)
 
 app.add_exception_handler(Exception, global_exception_handler)
 
