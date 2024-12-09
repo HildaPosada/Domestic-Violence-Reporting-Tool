@@ -2,8 +2,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 from src.db.main import init_db
-from src.auth.routes import auth_router
 from src.report.routes import report_router
+from src.agency.routes import agency_router
 from src.exception_handler.global_exception import global_exception_handler
 
 
@@ -47,3 +47,5 @@ def root():
 # app.include_router(auth_router, prefix=f"/api/{version}/users", tags=["users"])
 
 app.include_router(report_router, prefix=f"/api/{version}/reports", tags=["reports"])
+
+app.include_router(agency_router, prefix=f"/api/{version}/agencies", tags=["agencies"])

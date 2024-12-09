@@ -38,8 +38,9 @@ def all_agencies(agencies):
             agency_name=agency.agency_name,
             email=agency.email,
             phone_number=agency.phone,
-            date_created=agency.created_at,
-            reports=agency.reports
+            is_activated=agency.is_activated,
+            date_created=format_date(agency.created_at),
+            reports=all_reports(agency.reports) if "reports" in agency else None
         )
         for agency in agencies
     ]
