@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 export default function FollowUpReports() {
     const [username, setUsername] = useState(""); // State for User ID
     const [reportId, setReportId] = useState(""); // State for specific Report ID
@@ -7,14 +5,14 @@ export default function FollowUpReports() {
     const [reportsById, setReportsById] = useState([]); // State for specific report details
     const [loadingByUsername, setLoadingByUsername] = useState(false); // State for loading
     const [loadingByByReportId, setLoadingByByReportId] = useState(false); // State for loading
-    const [errorByUsername, setErrorByUsername] = useState(null)
-    const [errorById, setErrorById] = useState(null)
+    const [errorByUsername, setErrorByUsername] = useState(null);
+    const [errorById, setErrorById] = useState(null);
 
     // Fetch report history by User ID
     const fetchReportsByUsername = async () => {
         setLoadingByUsername(true);
-        setErrorByUsername(null)
-        setReportsByUsername([])
+        setErrorByUsername(null);
+        setReportsByUsername([]);
         try {
             const response = await fetch(
                 `${import.meta.env.VITE_BACKEND_API}/api/v1/reports/${username}`
@@ -24,13 +22,11 @@ export default function FollowUpReports() {
                 const data = await response.json();
                 setReportsByUsername(data);
             } else {
-                console.error("Failed to fetch reports");
+                setErrorByUsername("Username not found!");
                 setReportsByUsername([]);
-                setErrorByUsername("Username not found!")
             }
         } catch (error) {
-            console.error("Error fetching reports:", error);
-            setErrorByUsername(error.message)
+            setErrorByUsername(error.message);
         } finally {
             setLoadingByUsername(false);
         }
@@ -39,8 +35,8 @@ export default function FollowUpReports() {
     // Fetch specific report details by Report ID
     const fetchReportById = async () => {
         setLoadingByByReportId(true);
-        setErrorById(null)
-        setReportsById([])
+        setErrorById(null);
+        setReportsById([]);
         try {
             const response = await fetch(
                 `${import.meta.env.VITE_BACKEND_API}/api/v1/reports/report/${reportId}`
@@ -50,25 +46,23 @@ export default function FollowUpReports() {
                 const data = await response.json();
                 setReportsById(data);
             } else {
-                console.error("Failed to fetch report details");
-                setErrorById("Report ID not found!")
+                setErrorById("Report ID not found!");
                 setReportsById([]);
             }
         } catch (error) {
-            console.error("Error fetching report details:", error);
-            setErrorById(error.message)
+            setErrorById(error.message);
         } finally {
             setLoadingByByReportId(false);
         }
     };
 
     return (
-        <div className="flex justify-center items-center flex-col h-screen p-6">
-            <div className="bg-white p-4 md:p-6 rounded-lg">
-                <h2 className="text-2xl font-bold mb-6">Report History</h2>
+        <div className="flex justify-center items-center w-screen h-screen bg-gradient-to-b from-custom-blue to-custom-purple">
+            <div className="bg-white p-6 shadow-lg rounded-md w-3/4 max-w-lg">
+                <h2 className="text-2xl font-bold mb-6 text-center">Report History</h2>
 
                 {/* Input for User ID */}
-                <div className="w-full max-w-md mb-6">
+                <div className="w-full mb-6">
                     <label htmlFor="username" className="block font-medium mb-2">
                         Enter Username
                     </label>
@@ -78,7 +72,7 @@ export default function FollowUpReports() {
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         placeholder="Enter your User ID"
-                        className="w-full h-[40px] border-2 border-solid border-gray-300 outline-none rounded-md p-2 text-gray-700"
+                        className="w-full h-[40px] border border-gray-300 rounded-md p-2 text-gray-700"
                     />
                     <button
                         onClick={fetchReportsByUsername}
@@ -89,28 +83,26 @@ export default function FollowUpReports() {
                 </div>
 
                 {/* Display Report History */}
-                <div className="w-full max-w-md mb-6 overflow-y-auto">
-                    {reportsByUsername && reportsByUsername.length > 0 && (
-                        <div>
-                            <h3 className="text-lg font-bold mb-4">Report History</h3>
-                            <ul className="list-disc pl-5">
-                                {reportsByUsername.map((report) => (
-                                    <li key={report.report_id} className="mb-2">
-                                        <strong>Report ID:</strong> {report.report_id} <br />
-                                        <strong>Time:</strong> {new Date(report.date_created).toLocaleString()} <br />
-                                        <strong>Progress:</strong> {report.progress || "In Progress"}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                <div className="w-full mb-6 overflow-y-auto max-h-40">
+                    {reportsByUsername.length > 0 ? (
+                        <ul className="list-disc pl-5">
+                            {reportsByUsername.map((report) => (
+                                <li key={report.report_id} className="mb-2">
+                                    <strong>Report ID:</strong> {report.report_id} <br />
+                                    <strong>Time:</strong> {new Date(report.date_created).toLocaleString()} <br />
+                                    <strong>Progress:</strong> {report.progress || "In Progress"}
+                                </li>
+                            ))}
+                        </ul>
+                    ) : (
+                        errorByUsername && (
+                            <p className="text-red-600">{errorByUsername}</p>
+                        )
                     )}
-
-                    {errorByUsername && errorByUsername != null && <p className="text-red-600">{errorByUsername}
-                    </p>}
                 </div>
 
                 {/* Input for Specific Report ID */}
-                <div className="w-full max-w-md mt-8">
+                <div className="w-full mb-6">
                     <label htmlFor="reportId" className="block font-medium mb-2">
                         Enter Report ID
                     </label>
@@ -120,7 +112,7 @@ export default function FollowUpReports() {
                         value={reportId}
                         onChange={(e) => setReportId(e.target.value)}
                         placeholder="Enter Report ID"
-                        className="w-full h-[40px] border-2 border-solid border-gray-300 outline-none rounded-md p-2 text-gray-700"
+                        className="w-full h-[40px] border border-gray-300 rounded-md p-2 text-gray-700"
                     />
                     <button
                         onClick={fetchReportById}
@@ -131,24 +123,20 @@ export default function FollowUpReports() {
                 </div>
 
                 {/* Display Specific Report Details */}
-                <div className="w-full max-w-md mt-8 overflow-y-auto">
-                    {reportsById && reportsById.length > 0 && (
-                        <div>
-                            <h3 className="text-lg font-bold mb-4">Report History</h3>
-                            <ul className="list-disc pl-5">
-                                {reportsById.map((report) => (
-                                    <li key={report.report_id} className="mb-2">
-                                        <strong>Report ID:</strong> {report.report_id} <br />
-                                        <strong>Time:</strong> {new Date(report.date_created).toLocaleString()} <br />
-                                        <strong>Progress:</strong> {report.progress || "In Progress"}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                <div className="w-full overflow-y-auto max-h-40">
+                    {reportsById.length > 0 ? (
+                        <ul className="list-disc pl-5">
+                            {reportsById.map((report) => (
+                                <li key={report.report_id} className="mb-2">
+                                    <strong>Report ID:</strong> {report.report_id} <br />
+                                    <strong>Time:</strong> {new Date(report.date_created).toLocaleString()} <br />
+                                    <strong>Progress:</strong> {report.progress || "In Progress"}
+                                </li>
+                            ))}
+                        </ul>
+                    ) : (
+                        errorById && <p className="text-red-600">{errorById}</p>
                     )}
-
-                    {errorById && errorById != null && <p className="text-red-600">{errorById}
-                    </p>}
                 </div>
             </div>
         </div>
