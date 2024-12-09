@@ -15,6 +15,7 @@ export default function Registration() {
   }
 
   async function handleFormSubmit(data) {
+    setLoading(true)
     try {
       const response = await fetch(
         `${import.meta.env.VITE_BACKEND_API}/api/v1/reports/create-report`,
@@ -39,11 +40,11 @@ export default function Registration() {
           errorData.message || response.statusText
         );
         setLoading(false);
-        setReportData(initialReportData)
+        
       }
     } catch (error) {
       console.error("Error submitting report:", error);
-      setReportData(initialReportData)
+     
       setLoading(false);
     }
   };
