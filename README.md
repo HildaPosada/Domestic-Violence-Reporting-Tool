@@ -23,14 +23,14 @@ Hilda Posada - California/USA,
 Tope Taiwo - Lagos/Nigeria,
 Emmanuel Chiemela Chinonso - Lagos/Nigeria,
 Olusegun Bamgbelu - Lagos/Nigeria,
-Wisdom Agbasionye - Lagos/Nigeria,
+Wisdom Agbasionye - Lagos/Nigeria.
 
 ### **Github usernames**
 Hilda Posada - https://github.com/HildaPosada,
 Tope Taiwo - https://github.com/topzyray,
 Emmanuel Chiemela Chinonso - https://github.com/mellatunez10,
 Olusegun Bamgbelu - https://github.com/oluseguncodess,
-Wisdom Agbasionye - https://github.com/wisdomtochi,
+Wisdom Agbasionye - https://github.com/wisdomtochi.
 
 ### **EdX Usernames**
 Hilda Posada - https://profile.edx.org/u/hildaecogreen_gmail_com
