@@ -27,7 +27,6 @@ async def get_report(report_id: uuid.UUID, session: AsyncSession = Depends(get_s
 
 @report_router.post("/create-report", status_code=status.HTTP_201_CREATED, response_model=dict)
 async def create_report(user_data: ReportCreateModel, session: AsyncSession = Depends(get_session)) -> dict:
-    print(f"Create Report Route Level: {user_data}")
     report_id = await report_service.create_report(user_data, session)
     return {"reportId": report_id}
 

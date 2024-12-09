@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { IoIosAddCircle, IoIosRemoveCircle } from "react-icons/io";
+import { IoIosAddCircle, IoIosRemoveCircle, IoMdCheckmark } from "react-icons/io";
 import { IoMicOutline } from "react-icons/io5";
 import { CiFileOn } from "react-icons/ci";
 import { useNavigate } from "react-router-dom"; // For navigation
@@ -8,15 +8,17 @@ import NodalComponent from "./Modal";
 export default function Home() {
   const navigate = useNavigate(); // Hook for programmatic navigation
 
-  const [notification, setNotification] = useState(true);
+  const [notification, setNotification] = useState(false);
   const [loading, setLoading] = useState(false);
   const [reportData, setReportData] = useState({
     username: "",
     description: "",
   }); // State for the Report ID
+  const [reportId, setReportId] = useState("")
 
   const handleSubmit = async (e) => {
     setLoading(true);
+    setNotification(false)
     e.preventDefault(); // Prevent page refresh
     // const userId = e.target.userId.value; // Grab User ID from input box
     // const description = e.target.description.value; // Grab description from textarea
@@ -45,7 +47,7 @@ export default function Home() {
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:8000/api/v1/reports/create-report",
+        `${import.meta.env.VITE_BACKEND_API}/api/v1/reports/create-report`,
         {
           method: "POST",
           headers: {
@@ -58,8 +60,8 @@ export default function Home() {
       if (response.ok) {
         const data = await response.json(); // Parse backend response
 
-        console.log("Report successfully created with ID:", data);
-
+        setReportId(data.reportId)
+        setNotification(true)
         setLoading(false);
       } else {
         const errorData = await response.json();
@@ -123,11 +125,11 @@ export default function Home() {
   };
 
   return (
-    <div className="flex justify-center items-center  mt-4 w-full">
+    <div className="flex justify-center pt-4 w-full">
       <div className="flex flex-col justify-center items-center">
         <form
           onSubmit={handleSubmit}
-          className="w-4/5 max-w-[600px] bg-white px-6 pt-6 pb-8 rounded-lg shadow-custom relative"
+          className="w-full sm:min-w-[500px] max-w-[600px] bg-white px-6 pt-6 pb-8 rounded-lg shadow-custom relative"
         >
           <h2 className="text-xl md:text-3xl font-bold text-center">
             Domestic Violence
@@ -191,10 +193,10 @@ export default function Home() {
             {/* Follow-Up Reports Button */}
             <button
               type="button"
-              className="h-[40px] px-4 bg-blue-500 text-white rounded-md shadow hover:bg-blue-600 transition"
+              className="px-4 py-1 md:py-2 bg-blue-500 text-white rounded-md shadow hover:bg-blue-600 transition-all ease-in-out duration-300"
               onClick={() => navigate("/follow-up-reports")}
             >
-              Follow-Up Reports
+              Report History
             </button>
           </div>
 
@@ -244,7 +246,7 @@ export default function Home() {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full h-14 bg-purple-500 border-none rounded-md shadow-custom cursor-pointer text-base mt-8 text-white hover:bg-purple-600 transition"
+            className="py-2 md:py-3 w-full bg-purple-500 border-none rounded-md shadow-custom cursor-pointer text-base mt-8 text-white hover:bg-purple-600 transition"
           >
             {loading ? (
               <span className="animate-pulse">Submitting....</span>
@@ -256,20 +258,23 @@ export default function Home() {
           {/* Show the Report ID if it exists */}
         </form>
 
-        <div className="mt-2 sm:w-[95%] w-4/5 max-w-[600px] bg-white px-6 pt-6 pb-8 rounded-lg shadow-custom relative">
-          {/* {reportId && ( */}
+        
 
           {/* )} */}
           <NodalComponent
             open={notification}
             onClose={() => setNotification(false)}
           >
-            <p className="mt-4 text-green-600">
-              Thank you! Your report has been submitted. Your Report ID is:{" "}
-              <strong>reportId</strong>
-            </p>
+            <div className="flex items-center flex-col gap-4">
+              <span className="p-2 bg-green-500 rounded-full"><IoMdCheckmark size={20} color="white" /></span>
+              <p className="text-green-600 text-center">
+                Thank you! Your report has been submitted. Your Report ID is:{" "}
+                <strong>{reportId}</strong>. Please keep this for reference.
+              </p>
+              <button onClick={() => setNotification(false)} type="button" className=" px-2 py-1.5 bg-red-500 text-white rounded w-max">Close</button>
+            </div>
           </NodalComponent>
-        </div>
+  
       </div>
     </div>
   );

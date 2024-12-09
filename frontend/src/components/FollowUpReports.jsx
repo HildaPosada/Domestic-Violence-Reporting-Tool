@@ -12,7 +12,7 @@ export default function FollowUpReports() {
         setLoading(true);
         try {
             const response = await fetch(
-                `https://domestic-violence-reporting-tool-m1sd.onrender.com/api/v1/reports/get-all-user-reports/${userId}`
+                `${import.meta.env.VITE_BACKEND_API}/api/v1/reports/get-all-user-reports/${userId}`
             );
 
             if (response.ok) {
@@ -34,7 +34,7 @@ export default function FollowUpReports() {
         setLoading(true);
         try {
             const response = await fetch(
-                `https://domestic-violence-reporting-tool-m1sd.onrender.com/api/v1/reports/get-all-follow-up-reports/${reportId}`
+                `${import.meta.env.VITE_BACKEND_API}/api/v1/reports/get-all-follow-up-reports/${reportId}`
             );
 
             if (response.ok) {
