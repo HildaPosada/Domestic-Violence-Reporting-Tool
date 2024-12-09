@@ -19,23 +19,22 @@
    - **State Management:** State Hook
 
 ## **Team Members**
-Hilda Posada - California/USA,
-Tope Taiwo - Lagos/Nigeria,
-Emmanuel Chiemela Chinonso - Lagos/Nigeria,
-Olusegun Bamgbelu - Lagos/Nigeria,
-Wisdom Agbasionye - Lagos/Nigeria.
+Hilda Posada - California/USA  
+Tope Taiwo - Lagos/Nigeria  
+Emmanuel Chiemela Chinonso - Lagos/Nigeria  
+Olusegun Bamgbelu - Lagos/Nigeria  
+Wisdom Agbasionye - Lagos/Nigeria  
 
 ### **Github usernames**
-Hilda Posada - https://github.com/HildaPosada,
-Tope Taiwo - https://github.com/topzyray,
-Emmanuel Chiemela Chinonso - https://github.com/mellatunez10,
-Olusegun Bamgbelu - https://github.com/oluseguncodess,
-Wisdom Agbasionye - https://github.com/wisdomtochi.
+Hilda Posada - [https://github.com/HildaPosada](https://github.com/HildaPosada)  
+Tope Taiwo - [https://github.com/topzyray](https://github.com/topzyray)  
+Emmanuel Chiemela Chinonso - [https://github.com/mellatunez10](https://github.com/mellatunez10)  
+Olusegun Bamgbelu - [https://github.com/oluseguncodess](https://github.com/oluseguncodess)  
+Wisdom Agbasionye - [https://github.com/wisdomtochi](https://github.com/wisdomtochi)  
 
 ### **EdX Usernames**
-Hilda Posada - https://profile.edx.org/u/hildaecogreen_gmail_com
-Tope Taiwo - https://profile.edx.org/u//topzyray
-Emmanuel Chiemela Chinonso - 
-Olusegun Bamgbelu - 
-Wisdom Agbasionye - https://profile.edx.org/u/wisdom_tochi
-
+Hilda Posada - [https://profile.edx.org/u/hildaecogreen_gmail_com](https://profile.edx.org/u/hildaecogreen_gmail_com)  
+Tope Taiwo - [https://profile.edx.org/u//topzyray](https://profile.edx.org/u//topzyray)  
+Emmanuel Chiemela Chinonso -   
+Olusegun Bamgbelu -   
+Wisdom Agbasionye - [https://profile.edx.org/u/wisdom_tochi](https://profile.edx.org/u/wisdom_tochi)  
