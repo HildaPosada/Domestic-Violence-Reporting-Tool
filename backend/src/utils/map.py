@@ -1,16 +1,19 @@
 from src.report.schemas import ReportResponseModel
 from src.report.schemas import Follow_Up_Response_Model
 from src.agency.schemas import AgencyResponseModel
+from src.utils.dateformatter import format_date
 
 def all_reports(reports):
     response_models = [
         ReportResponseModel(
+            user=report.username,
             report_id=report.uid,
-            description=report.description,
+            progress=report.progress,
             agency_id=report.agency_uid,
-            date_created=report.created_at,
-            follow_ups=all_follow_ups(report.follow_ups)
+            date_created=format_date(report.created_at),
+            follow_ups=all_follow_ups(report.follow_ups) if "follow_ups" in report else None
         )
+        # print(report)
         for report in reports
     ]
     return response_models
@@ -20,9 +23,8 @@ def all_follow_ups(follow_ups):
     response_model = [
         Follow_Up_Response_Model(
             follow_up_id=follow_up.uid,
-            description=follow_up.description,
             report_id=follow_up.report_id,
-            date_created=follow_up.created_at
+            date_created=format_date(follow_up.created_at)
         )
         for follow_up in follow_ups
     ]
@@ -34,10 +36,8 @@ def all_agencies(agencies):
         AgencyResponseModel(
             agency_id=agency.uid,
             agency_name=agency.agency_name,
-            agency_type=agency.agency_type,
             email=agency.email,
             phone_number=agency.phone,
-            address=agency.address,
             date_created=agency.created_at,
             reports=agency.reports
         )

@@ -21,7 +21,7 @@ class User(SQLModel, table=True):
     )
     username: str
     is_active: bool = Field(default=True)
-    reports: List["src.report.models.Report"] = Relationship(back_populates="user")
+    # reports: List["src.report.models.Report"] = Relationship(back_populates="user")
     created_at: datetime = Field(sa_column=Column(pg.TIMESTAMP, default=datetime.now))
     updated_at: datetime = Field(sa_column=Column(pg.TIMESTAMP, default=datetime.now))
 
