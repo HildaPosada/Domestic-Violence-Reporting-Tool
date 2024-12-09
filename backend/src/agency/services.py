@@ -233,7 +233,7 @@ class AgencyService:
 
         raise NotFoundException(
             status.HTTP_404_NOT_FOUND,
-            f"No agency with this email ({agency_data["email"]}) found",
+             "Agency not found",
         )
 
     async def update_report_status(
