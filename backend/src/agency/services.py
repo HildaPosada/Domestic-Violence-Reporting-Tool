@@ -159,7 +159,7 @@ class AgencyService:
 
         await session.commit()
 
-        return status.HTTP_200_OK
+        return "Registration successful"
 
     # activate/deactivate agency
     async def toggle_agency_status(

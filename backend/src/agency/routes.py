@@ -35,8 +35,8 @@ async def get_agency_reports(agency_id: uuid.UUID, session: AsyncSession = Depen
     result = await agency_service.get_all_agency_reports(agency_id, session)
     return result
 
-@agency_router.post("/create-agency", status_code=status.HTTP_200_OK, response_model=None)
-async def create_agency(agency_data: AgencyCreateModel, session: AsyncSession = Depends(get_session)):
+@agency_router.post("/create-agency", status_code=status.HTTP_200_OK, response_model=str)
+async def create_agency(agency_data: AgencyCreateModel, session: AsyncSession = Depends(get_session)) -> str:
     result = await agency_service.create_agency(agency_data, session)
     return result
 
