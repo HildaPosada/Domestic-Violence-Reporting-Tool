@@ -52,12 +52,8 @@ export default function FollowUpReports() {
         }
     };
 
-    console.log(reportsByUsername)
-
-    console.log(reportsById)
-
     return (
-        <div className="bg-gradient-to-b from-custom-blue to-custom-purple flex justify-center items-center flex-col h-screen p-6">
+        <div className="flex justify-center items-center flex-col h-screen p-6">
             <div className="bg-white p-4 md:p-6 rounded-lg">
                 <h2 className="text-2xl font-bold mb-6">Report History</h2>
 
