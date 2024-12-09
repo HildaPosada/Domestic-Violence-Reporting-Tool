@@ -129,7 +129,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex justify-center pt-4 w-full">
+    <div className="flex justify-center pt-0 h-full w-full">
       <div className="flex flex-col justify-center items-center">
         <form
           onSubmit={handleSubmit}
