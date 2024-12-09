@@ -11,7 +11,7 @@ The Domestic Violence Reporting Tool is designed to provide a safe and efficient
 | **Programming Language:** Python              | **Programming Language:** JavaScript        |
 | **Framework:** FastAPI                        | **Framework:** React                        |
 | **Database:** Neon (Serverless PostgreSQL)    | **Styling:** Tailwind                       |
-|                                               | **State Management:** State Hook            |
+| **ORM:** SQLAlchemy                           | **State Management:** State Hook            |
 
 ---
 
@@ -20,9 +20,9 @@ The Domestic Violence Reporting Tool is designed to provide a safe and efficient
 | **Name**                    | **Location**       | **GitHub Username**                              | **EdX Username**                                  |
 |-----------------------------|-------------------|------------------------------------------------|------------------------------------------------|
 | Hilda Posada                | California, USA    | [HildaPosada](https://github.com/HildaPosada)    | [Hilda's EdX](https://profile.edx.org/u/hildaecogreen_gmail_com) |
-| Tope Taiwo                  | Lagos, Nigeria     | [topzyray](https://github.com/topzyray)          | [Tope's EdX](https://profile.edx.org/u/topzyray) |
+| Tope Taiwo                  | Akure, Nigeria     | [topzyray](https://github.com/topzyray)          | [Tope's EdX](https://profile.edx.org/u/topzyray) |
 | Emmanuel Chiemela Chinonso  | Lagos, Nigeria     | [mellatunez10](https://github.com/mellatunez10)  | — |
-| Olusegun Bamgbelu           | Lagos, Nigeria     | [oluseguncodess](https://github.com/oluseguncodess) | — |
+| Olusegun Bamgbelu           | Lagos, Nigeria     | [oluseguncodess](https://github.com/oluseguncodess) | [Olusegun's EdX](https://profile.edx.org/u/ShegzY_) |
 | Wisdom Agbasionye           | Lagos, Nigeria     | [wisdomtochi](https://github.com/wisdomtochi)    | [Wisdom's EdX](https://profile.edx.org/u/wisdom_tochi) |
 
 ---
