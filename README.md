@@ -27,3 +27,12 @@ Demo([youtube](https://profile.edx.org/u/hildaecogreen_gmail_com)) recorded 12/9
 | Wisdom Agbasionye           | Lagos, Nigeria     | [wisdomtochi](https://github.com/wisdomtochi)    | [Wisdom's EdX](https://profile.edx.org/u/wisdom_tochi) |
 
 ---
+
+## **About the app**
+For this application, we use the modular architecture.
+In this approach, the codebase is divided into separate, self-contained modules or folders based on functionality or feature.
+This helps in organizing the code, making it more maintainable, scalable, and easier to understand.
+
+### **About the Frontend folder**
+
+### **About the Backend folder**
