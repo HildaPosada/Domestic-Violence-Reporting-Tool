@@ -5,15 +5,17 @@ import { CiFileOn } from "react-icons/ci";
 import { useNavigate } from "react-router-dom"; // For navigation
 import NodalComponent from "./Modal";
 
+let initialReportData = {
+  username: "",
+  description: "",
+}
+
 export default function Home() {
   const navigate = useNavigate(); // Hook for programmatic navigation
 
   const [notification, setNotification] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [reportData, setReportData] = useState({
-    username: "",
-    description: "",
-  }); // State for the Report ID
+  const [reportData, setReportData] = useState(initialReportData); // State for the Report ID
   const [reportId, setReportId] = useState("")
 
   const handleSubmit = async (e) => {
@@ -61,6 +63,7 @@ export default function Home() {
         const data = await response.json(); // Parse backend response
 
         setReportId(data.reportId)
+        setReportData(initialReportData)
         setNotification(true)
         setLoading(false);
       } else {
@@ -70,10 +73,11 @@ export default function Home() {
           errorData.message || response.statusText
         );
         setLoading(false);
+        setReportData(initialReportData)
       }
     } catch (error) {
       console.error("Error submitting report:", error);
-
+      setReportData(initialReportData)
       setLoading(false);
     }
   };
@@ -263,7 +267,10 @@ export default function Home() {
           {/* )} */}
           <NodalComponent
             open={notification}
-            onClose={() => setNotification(false)}
+            onClose={() => {
+              setNotification(false)
+              setReportData(initialReportData)
+              }}
           >
             <div className="flex items-center flex-col gap-4">
               <span className="p-2 bg-green-500 rounded-full"><IoMdCheckmark size={20} color="white" /></span>
@@ -271,7 +278,10 @@ export default function Home() {
                 Thank you! Your report has been submitted. Your Report ID is:{" "}
                 <strong>{reportId}</strong>. Please keep this for reference.
               </p>
-              <button onClick={() => setNotification(false)} type="button" className=" px-2 py-1.5 bg-red-500 text-white rounded w-max">Close</button>
+              <button onClick={() => {
+                setNotification(false)
+                setReportData(initialReportData)
+                }} type="button" className=" px-2 py-1.5 bg-red-500 text-white rounded w-max">Close</button>
             </div>
           </NodalComponent>
   
