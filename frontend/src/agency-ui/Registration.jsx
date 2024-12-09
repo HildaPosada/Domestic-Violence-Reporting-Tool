@@ -3,15 +3,50 @@ import { useState } from "react";
 
 export default function Registration() {
   const [navigate, setNavigate] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   async function handleFormNavigation() {
     if (!navigate) {
-      const isValid = await trigger(["agency_name", "email", "phone_number"]); // Validate first-page fields
+      const isValid = await trigger(["agency_name", "email"]); // Validate first-page fields
       if (isValid) setNavigate((nav) => !nav); // Only navigate if valid
     } else {
       setNavigate((nav) => !nav); // Allow navigation back without validation
     }
   }
+
+  async function handleFormSubmit(data) {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_API}/api/v1/reports/create-report`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json", // Add Content-Type header
+          },
+          body: JSON.stringify(data),
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json(); // Parse backend response
+
+        
+        setLoading(false);
+      } else {
+        const errorData = await response.json();
+        console.error(
+          "Failed to submit report:",
+          errorData.message || response.statusText
+        );
+        setLoading(false);
+        setReportData(initialReportData)
+      }
+    } catch (error) {
+      console.error("Error submitting report:", error);
+      setReportData(initialReportData)
+      setLoading(false);
+    }
+  };
 
   const {
     register,
@@ -28,9 +63,7 @@ export default function Registration() {
         </h2>
         <form
           className="w-full max-w-[550px] bg-white px-3 md:px-8 pt-6 flex flex-col mt-4"
-          onSubmit={handleSubmit((data) => {
-            console.log(data);
-          })}
+          onSubmit={handleSubmit(handleFormSubmit)}
           autoComplete="on"
         >
           <div
@@ -60,7 +93,7 @@ export default function Registration() {
             <label htmlFor="email">
               <div className="flex justify-between items-center">
                 <span className="font-medium block">Email</span>
-                {errors.agency_name && (
+                {errors.email && (
                   <p className="text-red-500 text-sm">{errors.email.message}</p>
                 )}
               </div>
@@ -78,6 +111,51 @@ export default function Registration() {
                 id="email"
               />
             </label>
+            
+          </div>
+          <div
+            className={
+              navigate
+                ? "opacity-100 flex flex-col gap-6"
+                : "opacity-0 pointer-events-none hidden"
+            }
+          >
+            {/* <label htmlFor="address">
+            <div className="flex justify-between items-center">
+                <span className="font-medium block">Address</span>
+                {errors.address && (
+                  <p className="text-red-500 text-sm">{errors.address.message}</p>
+                )}
+              </div>
+              <input
+                {...register("address", {
+                  required: "This field is required",
+                  maxLength: {
+                    value: 500,
+                    message: "Character limit exceeded",
+                  },
+                })}
+                type="text"
+                className="w-full h-[40px] border-2 border-solid border-gray-300 outline-none rounded-md p-4 md:text-base text-sm text-gray-700 mt-1"
+                placeholder="Plot 6, Silicon Valley, USA"
+                id="address"
+              />
+            </label> */}
+            {/* <label htmlFor="agencyType">
+            <div className="flex justify-between items-center">
+                <span className="font-medium block">Agency Type</span>
+                {errors.agency_type && (
+                  <p className="text-red-500 text-sm">{errors.agency_type.message}</p>
+                )}
+              </div>
+              <input
+                {...register("agency_type", {required: "This field is required"})}
+                type="text"
+                className="w-full h-[40px] border-2 border-solid border-gray-300 outline-none rounded-md p-4 md:text-base text-sm text-gray-700 mt-1"
+                placeholder="e.g Non-profit"
+                id="agencyType"
+              />
+            </label> */}
             <label htmlFor="phone">
             <div className="flex justify-between items-center">
                 <span className="font-medium block">Phone Number</span>
@@ -103,50 +181,6 @@ export default function Registration() {
                 id="phone"
               />
             </label>
-          </div>
-          <div
-            className={
-              navigate
-                ? "opacity-100 flex flex-col gap-6"
-                : "opacity-0 pointer-events-none hidden"
-            }
-          >
-            <label htmlFor="address">
-            <div className="flex justify-between items-center">
-                <span className="font-medium block">Address</span>
-                {errors.address && (
-                  <p className="text-red-500 text-sm">{errors.address.message}</p>
-                )}
-              </div>
-              <input
-                {...register("address", {
-                  required: "This field is required",
-                  maxLength: {
-                    value: 500,
-                    message: "Character limit exceeded",
-                  },
-                })}
-                type="text"
-                className="w-full h-[40px] border-2 border-solid border-gray-300 outline-none rounded-md p-4 md:text-base text-sm text-gray-700 mt-1"
-                placeholder="Plot 6, Silicon Valley, USA"
-                id="address"
-              />
-            </label>
-            <label htmlFor="agencyType">
-            <div className="flex justify-between items-center">
-                <span className="font-medium block">Agency Type</span>
-                {errors.agency_type && (
-                  <p className="text-red-500 text-sm">{errors.agency_type.message}</p>
-                )}
-              </div>
-              <input
-                {...register("agency_type", {required: "This field is required"})}
-                type="text"
-                className="w-full h-[40px] border-2 border-solid border-gray-300 outline-none rounded-md p-4 md:text-base text-sm text-gray-700 mt-1"
-                placeholder="e.g Non-profit"
-                id="agencyType"
-              />
-            </label>
             <label htmlFor="password">
             <div className="flex justify-between items-center">
                 <span className="font-medium block">Password</span>
@@ -160,10 +194,6 @@ export default function Registration() {
                   minLength: {
                     value: 6,
                     message: "Minimum characters is 6",
-                  },
-                  maxLength: {
-                    value: 10,
-                    message: "Character limit exceeded",
                   },
                   pattern: {
                     value: /^(?=.*[A-Z]).+$/,
