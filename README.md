@@ -21,7 +21,7 @@ The Domestic Violence Reporting Tool is designed to provide a safe and efficient
 |-----------------------------|-------------------|------------------------------------------------|------------------------------------------------|
 | Hilda Posada                | California, USA    | [HildaPosada](https://github.com/HildaPosada)    | [Hilda's EdX](https://profile.edx.org/u/hildaecogreen_gmail_com) |
 | Tope Taiwo                  | Akure, Nigeria     | [topzyray](https://github.com/topzyray)          | [Tope's EdX](https://profile.edx.org/u/topzyray) |
-| Emmanuel Chiemela Chinonso  | Lagos, Nigeria     | [mellatunez10](https://github.com/mellatunez10)  | — |
+| Emmanuel Chiemela Chinonso  | Lagos, Nigeria     | [mellatunez10](https://github.com/mellatunez10)  | [Mella's EdX](https://profile.edx.org/u/mellatunez) |
 | Olusegun Bamgbelu           | Lagos, Nigeria     | [oluseguncodess](https://github.com/oluseguncodess) | [Olusegun's EdX](https://profile.edx.org/u/ShegzY_) |
 | Wisdom Agbasionye           | Lagos, Nigeria     | [wisdomtochi](https://github.com/wisdomtochi)    | [Wisdom's EdX](https://profile.edx.org/u/wisdom_tochi) |
 
