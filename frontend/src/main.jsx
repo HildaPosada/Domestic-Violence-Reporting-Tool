@@ -7,13 +7,23 @@ import Resources from "./pages/Resources.jsx";
 import SafetyTips from "./pages/SafetyTips.jsx";
 import FollowUpReports from "./components/FollowUpReports";
 import Registration from "./agency-ui/Registration.jsx";
+import Home from "./components/Home.jsx";
+
 
 const router = createBrowserRouter([
-  { path: "/", element: <App /> },
-  { path: "/resources", element: <Resources /> },
-  { path: "/safetyTips", element: <SafetyTips /> },
-  { path: "/follow-up-reports", element: <FollowUpReports /> }, // Add this route
-  { path: "/agency-registration", element: <Registration/>}
+  {
+    path: "/", 
+    element: <App />, 
+    children: [
+      { index: true, element: <Home /> },
+      { path: "resources", element: <Resources /> },
+      { path: "safetyTips", element: <SafetyTips /> },
+      { path: "follow-up-reports", element: <FollowUpReports /> }, // Add this route
+      
+    ]
+  },
+  { path: "/agency-registration", element: <Registration /> }
+
 ]);
 
 createRoot(document.getElementById("root")).render(
