@@ -32,7 +32,7 @@ Emmanuel Chiemela Chinonso - https://github.com/mellatunez10,
 Olusegun Bamgbelu - https://github.com/oluseguncodess,
 Wisdom Agbasionye - https://github.com/wisdomtochi,
 
-###**EdX Usernames**
+### **EdX Usernames**
 Hilda Posada - https://profile.edx.org/u/hildaecogreen_gmail_com
 Tope Taiwo - https://profile.edx.org/u//topzyray
 Emmanuel Chiemela Chinonso - 
