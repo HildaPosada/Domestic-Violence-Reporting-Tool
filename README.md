@@ -19,11 +19,11 @@
    - **State Management:** State Hook
 
 ## **Team Members**
-Hilda Posada - California/USA
-Tope Taiwo - Lagos/Nigeria
-Emmanuel Chiemela Chinonso - Lagos/Nigeria
-Olusegun Bamgbelu - Lagos/Nigeria
-Wisdom Agbasionye - Lagos/Nigeria
+Hilda Posada - California/USA,
+Tope Taiwo - Lagos/Nigeria,
+Emmanuel Chiemela Chinonso - Lagos/Nigeria,
+Olusegun Bamgbelu - Lagos/Nigeria,
+Wisdom Agbasionye - Lagos/Nigeria,
 
 ### **Github usernames**
 Hilda Posada - https://github.com/HildaPosada,
