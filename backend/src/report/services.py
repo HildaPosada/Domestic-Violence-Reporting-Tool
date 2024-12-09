@@ -76,7 +76,6 @@ class ReportService:
         self, model: ReportCreateModel, session: AsyncSession
     ) -> str:
         try:
-            print(model.model_dump())
             report_id = str(custom_uuid.short_id())  # Generate unique ID
             new_report = Report(
                 uid=report_id,
